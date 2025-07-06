@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estadísticas de Ventas</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('/img_fondo/f4.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 5% auto;
+      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.07);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 40px;
+    }
+
+    li {
+      padding: 10px;
+      background-color: rgba(255, 255, 255, 0.05);
+      margin: 5px 0;
+      border-radius: 10px;
+      font-weight: 500;
+    }
+
+    canvas {
+      margin: 30px auto;
+      display: block;
+      background-color: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Estadísticas de ventas</h1>
+
+    <h2>Top 10 discos más vendidos</h2>
+    <ul>
+      <% discos.forEach(disco => { %>
+        <li><%= disco.Titulo %> — <%= disco.TotalVentas %> vendidos</li>
+      <% }) %>
+    </ul>
+    <canvas id="chartDiscos" height="200"></canvas>
+
+    <h2>Ventas por mes</h2>
+    <ul>
+      <% ventasMes.forEach(venta => { %>
+        <li><%= venta.Mes %> — <%= venta.TotalVentas %> discos vendidos</li>
+      <% }) %>
+    </ul>
+    <canvas id="chartMeses" height="200"></canvas>
+
+    <h2>Top 10 géneros musicales más vendidos</h2>
+    <ul>
+      <% generos.forEach(g => { %>
+        <li><%= g.NombreGenero %> — <%= g.TotalVentas %> discos vendidos</li>
+      <% }) %>
+    </ul>
+    <canvas id="chartGeneros" height="200"></canvas>
+  </div>
+
+  <script>
+    const ctxDiscos = document.getElementById('chartDiscos').getContext('2d');
+    new Chart(ctxDiscos, {
+      type: 'bar',
+      data: {
+        labels: <%- JSON.stringify(discos.map(d => d.Titulo)) %>,
+        datasets: [{
+          label: 'Ventas',
+          data: <%- JSON.stringify(discos.map(d => d.TotalVentas)) %>,
+          backgroundColor: 'rgba(255, 255, 255, 0.3)',
+          borderColor: 'rgba(255, 255, 255, 0.8)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        plugins: { legend: { labels: { color: '#fff' } } },
+        scales: {
+          x: { ticks: { color: '#fff' } },
+          y: { beginAtZero: true, ticks: { color: '#fff' } }
+        }
+      }
+    });
+
+    const ctxMeses = document.getElementById('chartMeses').getContext('2d');
+    new Chart(ctxMeses, {
+      type: 'bar',
+      data: {
+        labels: <%- JSON.stringify(ventasMes.map(v => v.Mes)) %>,
+        datasets: [{
+          label: 'Ventas por mes',
+          data: <%- JSON.stringify(ventasMes.map(v => v.TotalVentas)) %>,
+          backgroundColor: 'rgba(0, 255, 255, 0.3)',
+          borderColor: 'rgba(0, 255, 255, 0.8)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        plugins: { legend: { labels: { color: '#fff' } } },
+        scales: {
+          x: { ticks: { color: '#fff' } },
+          y: { beginAtZero: true, ticks: { color: '#fff' } }
+        }
+      }
+    });
+
+    const ctxGeneros = document.getElementById('chartGeneros').getContext('2d');
+    new Chart(ctxGeneros, {
+      type: 'bar',
+      data: {
+        labels: <%- JSON.stringify(generos.map(g => g.NombreGenero)) %>,
+        datasets: [{
+          label: 'Ventas por género',
+          data: <%- JSON.stringify(generos.map(g => g.TotalVentas)) %>,
+          backgroundColor: 'rgba(255, 165, 0, 0.3)',
+          borderColor: 'rgba(255, 165, 0, 0.8)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        plugins: { legend: { labels: { color: '#fff' } } },
+        scales: {
+          x: { ticks: { color: '#fff' } },
+          y: { beginAtZero: true, ticks: { color: '#fff' } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

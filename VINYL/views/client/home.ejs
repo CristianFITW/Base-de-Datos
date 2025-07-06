@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tienda de Vinilos</title>
+  <style>
+    body {
+      margin: 0; padding: 0;
+      background: url('/img_fondo/f3.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 8% auto;
+      background-color: rgba(255, 255, 255, 0.08);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    a {
+      display: inline-block;
+      margin: 8px;
+      padding: 10px 20px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    a:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .debug {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Bienvenido a la tienda de vinilos</h1>
+
+    <% if (usuario) { %>
+      <p>Hola <strong><%= usuario.nombre %></strong>, bienvenido de nuevo.</p>
+    <% } else { %>
+      <p>
+        <a href="/auth/login">Inicia sesión</a> o 
+        <a href="/auth/register">Regístrate</a> para comenzar.
+      </p>
+    <% } %>
+
+    <div>
+      <a href="/vinilos">Visita la Tienda de Vinilos</a>
+      <a href="/estadisticas">Estadísticas</a>
+      <a href="/ventas/empleados">Ventas de Empleados</a>
+
+      <% if (usuario && usuario.tipo === 'U') { %>
+        <a href="/carrito">Carrito</a>
+      <% } %>
+
+      <% if (usuario && usuario.tipo === 'E') { %>
+        <a href="/empleado/registro-vinilo">Registro de Vinilo</a>
+      <% } %>
+
+      <% if (usuario) { %>
+        <a href="/auth/logout">Cerrar sesión</a>
+      <% } %>
+    </div>
+
+    <!-- Debug (puedes eliminar esto después) -->
+    <% if (usuario) { %>
+      <div class="debug">
+        <p><strong>Tipo de usuario:</strong> <%= usuario.tipo %></p>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

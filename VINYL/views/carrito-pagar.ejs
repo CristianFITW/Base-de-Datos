@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Confirmar Compra</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('/img_fondo/f8.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 8% auto;
+      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.07);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    select {
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2);
+      font-size: 1rem;
+    }
+
+    select option {
+      color: black;
+    }
+
+    button {
+      padding: 12px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Selecciona un empleado para completar tu compra</h2>
+    <form action="/carrito/pagar" method="POST">
+      <select name="empleadoID" required>
+        <% empleados.forEach(e => { %>
+          <option value="<%= e.EmpleadoPersonaID %>"><%= e.Nombre %></option>
+        <% }) %>
+      </select>
+      <button type="submit">Pagar</button>
+    </form>
+  </div>
+</body>
+</html>

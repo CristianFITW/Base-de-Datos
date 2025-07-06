@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('/img_fondo/f1.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+      z-index: -1;
+    }
+
+    .form-container {
+      max-width: 400px;
+      margin: 5% auto;
+      background-color: rgba(255, 255, 255, 0.08);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .form-container input,
+    .form-container select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2);
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+
+    /* Opciones visibles (color fondo y texto) */
+    .form-container select option {
+      background-color: white;
+      color: black;
+    }
+
+    .form-container input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .form-container button:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Registro</h2>
+    <form action="/auth/register" method="POST">
+      <input name="nombre" placeholder="Nombre" required />
+      <input name="apellidoPaterno" placeholder="Apellido Paterno" required />
+      <input name="apellidoMaterno" placeholder="Apellido Materno" />
+      <input name="direccion" placeholder="Dirección" />
+      <input name="telefono" placeholder="Teléfono" />
+      <input name="cp" placeholder="Código Postal" />
+      <input name="correo" type="email" placeholder="Correo" required />
+      <select name="sexo">
+        <option value="">Sexo</option>
+        <option value="M">Masculino</option>
+        <option value="F">Femenino</option>
+        <option value="O">Otro</option>
+      </select>
+      <input name="fechaNacimiento" type="date" />
+      <select name="tipoUsuario" required>
+        <option value="">Tipo de Usuario</option>
+        <option value="E">Empleado</option>
+        <option value="U">Usuario</option>
+      </select>
+      <input name="password" type="password" placeholder="Contraseña" required />
+      <button type="submit">Registrar</button>
+    </form>
+  </div>
+</body>
+</html>

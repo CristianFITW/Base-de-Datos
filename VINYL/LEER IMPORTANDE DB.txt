@@ -1,0 +1,7 @@
+El archivo script.sql con la estructura y los datos completos de la base de datos es demasiado grande para alojarlo directamente en este repositorio.
+
+Para descargarlo, por favor accede al siguiente enlace:
+
+Descargar script.sql desde OneDrive
+
+https://correoipn-my.sharepoint.com/:f:/g/personal/cgutierrezf2100_alumno_ipn_mx/EsaNjmawidtEhq529RizguwBrOFZU7yh0ZEJGB99Wg5OzA?e=5kMcq2
